@@ -1,0 +1,96 @@
+1#include<stdio.h>
+#include<unistd.h>
+void wait();
+void main()
+{
+int pd,lim,num,i;
+pd=fork();
+if(pd==0)
+{
+printf("Child process\n");
+printf("Process ID=%d\n",getpid());
+printf("Parent ID=%d\n",getppid());
+printf("Enter the limit:");
+scanf("%d",&lim);
+for(i=1;i<=lim;i++)
+printf("%d\n",i);
+}
+else if(pd>0)
+{
+wait();
+printf("Parent process\n");
+printf("Process ID=%d",getpid());
+printf("\nEnter a number\n");
+scanf("%d",&num);
+if(num%2==0)
+{
+printf("%d is even\n",num);
+}
+else
+{
+printf("%d is odd\n",num);
+}
+}
+else
+{
+printf("Fork Failed\n");
+}
+}
+
+#include<stdio.h>
+#include<unistd.h>
+#include<stdlib.h>
+void main()
+{
+char *args[]={"./ex",NULL};
+execvp(args[0],args);
+printf("End");
+}
+
+
+#include<stdio.h>
+#include<unistd.h>
+int main()
+{
+int i;
+printf("I am the program called by the first process");
+for(i=1;i<10;i++)
+{
+printf("%d*%d\n",i,i);
+}
+return 0;}
+
+
+#include<stdio.h>
+#include<unistd.h>
+#include<dirent.h>
+void main()
+{
+DIR *d;
+struct dirent *de;
+d=opendir(".");
+while(de=readdir(d))
+printf("%s\n",de->d_name);
+}
+
+#include<stdio.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/stat.h>
+#include<stdlib.h>
+void main()
+{
+char *path, path1[10];
+struct stat *nfile;
+nfile=(struct stat *) malloc(sizeof(struct stat));
+printf("Enter Filename:");
+scanf("%s",path1);
+stat(path1,nfile);
+printf("User Id: %d\n",nfile->st_uid);
+printf("Blocksize:%ld\n",nfile->st_blksize);
+printf("Last access time:%ld\n",nfile->st_atime);
+printf("Last modification:%ld\n",nfile->st_mtime);
+printf("Production mode:%d\n",nfile->st_mode);
+printf("Size of file:%ld\n",nfile->st_size);
+printf("Number of links:%ld\n",nfile->st_nlink);
+}
