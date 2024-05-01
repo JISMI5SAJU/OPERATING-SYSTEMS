@@ -1,0 +1,149 @@
+#include<stdio.h>
+#include<stdlib.h>
+int mutex=1,full=0,empty=3;
+void producer();
+void consumer();
+int wait(int s);
+int signal(int s);
+void main()
+{
+    int ch;
+    do{
+        printf("Enter your choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+           case 1:
+           if(mutex=1&empty!=0)
+           {
+               producer();
+               printf("produced item succesfully\n");
+           }
+            else{
+                printf("Buffer is full\n");
+            }
+            break;
+            case 2:
+            if(mutex=1&full!=0)
+            {
+                consumer();
+                printf("Consumed  item succesfully\n");
+                
+            }
+            else{
+                printf("Buffer is empty\n");
+            }
+            break;
+            case 3:
+            exit(0);
+            break;
+            
+        }
+    }while(ch!=3);
+}
+void producer()
+{
+    mutex=wait(mutex);
+    full=signal(full);
+    empty=wait(mutex);
+    mutex=signal(mutex);
+}
+void consumer()
+{
+    mutex=wait(mutex);
+    full=wait(full);
+    empty=signal(mutex);
+    mutex=signal(mutex);
+}
+int wait(int s)
+{
+    s--;
+    return s;
+}
+int signal(int s)
+{
+    s++;
+    return s;
+}
+OUTPUT:
+#include<stdio.h>
+#include<stdlib.h>
+int mutex=1,full=0,empty=3;
+void producer();
+void consumer();
+int wait(int s);
+int signal(int s);
+void main()
+{
+    int ch;
+    do{
+        printf("Enter your choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+           case 1:
+           if(mutex=1&empty!=0)
+           {
+               producer();
+               printf("produced item succesfully\n");
+           }
+            else{
+                printf("Buffer is full\n");
+            }
+            break;
+            case 2:
+            if(mutex=1&full!=0)
+            {
+                consumer();
+                printf("Consumed  item succesfully\n");
+                
+            }
+            else{
+                printf("Buffer is empty\n");
+            }
+            break;
+            case 3:
+            exit(0);
+            break;
+            
+        }
+    }while(ch!=3);
+}
+void producer()
+{
+    mutex=wait(mutex);
+    full=signal(full);
+    empty=wait(mutex);
+    mutex=signal(mutex);
+}
+void consumer()
+{
+    mutex=wait(mutex);
+    full=wait(full);
+    empty=signal(mutex);
+    mutex=signal(mutex);
+}
+int wait(int s)
+{
+    s--;
+    return s;
+}
+int signal(int s)
+{
+    s++;
+    return s;
+}
+
+
+OUTPUT:
+Enter your choice:1
+produced item succesfully
+Enter your choice:1
+produced item succesfully
+Enter your choice:2
+Consumed  item succesfully
+Enter your choice:2
+Consumed  item succesfully
+Enter your choice:2
+Buffer is empty
+Enter your choice:3
