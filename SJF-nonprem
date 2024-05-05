@@ -1,0 +1,64 @@
+#include <stdio.h>
+void main()
+{
+    int n,i,j,temp;
+    printf("Enter the no of processes");
+    scanf("%d",&n);
+    int p[n],bt[n],wt[n],tat[n];;
+    printf("Enter the process ID and correponding burst time\n");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&p[i]);
+        scanf("%d",&bt[i]);
+        
+    }
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            temp=bt[i];
+            bt[i]=bt[j];
+            bt[j]=temp;
+            
+            temp=p[i];
+            p[i]=p[j];
+            p[j]=temp;
+        
+        }
+    }
+    wt[0]=0;
+    tat[0]=bt[0];
+    float tot_wt=wt[0];
+    float tot_tat=bt[0];
+    for(int i=1;i<n;i++)
+    {
+        wt[i]=wt[i-1]+bt[i-1];
+        tat[i]=tat[i-1]+bt[i];
+        tot_wt=tot_wt+wt[i];
+        tot_tat=tot_tat+tat[i];
+    }
+    printf("Pro\tbt\t wt\ttat\n");
+    for(i=0;i<n;i++)
+    {
+        printf("P%d\t%d\t%d\t%d\n",p[i],bt[i],wt[i],tat[i]);
+    }
+    printf("Average waiting Time:%f\n",tot_wt/n);
+    printf("Average TurnAround Time:%f",tot_tat/n);
+}
+
+
+
+
+OUTPUT:
+Enter the no of processes3
+Enter the process ID and correponding burst time
+1
+5
+2
+10
+3
+3
+Pro	bt	 wt	tat
+P3	3	  0	  3
+P1	5  	3	  8
+P2	10	8	 18
+Average waiting Time:3.666667
+Average TurnAround Time:9.666667
