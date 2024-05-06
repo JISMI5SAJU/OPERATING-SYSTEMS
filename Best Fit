@@ -1,0 +1,82 @@
+#include<stdio.h>
+void main()
+{
+    int n,mno;
+    printf("Enter the no of processes");
+    scanf("%d",&n);
+    printf("Enter the no of memory blocks");
+    scanf("%d",&mno);
+    struct process{
+        int psize;
+        int flag;
+    }p[n];
+    struct memory{
+        int size;
+        int alloc;
+    }m[mno];
+    printf("Enter the process size");
+    for(int i=0;i<n;i++){
+        scanf("%d",&p[i].psize);
+    }
+    printf("Enter the size of memory block");
+    for(int i=0;i<mno;i++){
+        scanf("%d",&m[i].size);
+    }
+    int temp;
+    for(int i=0;i<n;i++){
+    for(int j=0;j<=i;j++){
+        if(p[i].psize<p[j].psize){
+        temp=p[i].psize;
+        p[i].psize=p[j].psize;
+        p[j].psize=temp;
+    }
+    }}
+    for(int i=0;i<n;i++){
+    for(int j=0;j<=i;j++){
+        if(m[i].size<m[j].size){
+        temp=m[i].size;
+        m[i].size=m[j].size;
+        m[j].size=temp;
+    }}}
+    for(int i=0;i<n;i++){
+ 
+        p[i].flag=0;
+    }
+    
+    for(int j=0;j<mno;j++){
+        m[j].alloc=0;
+    }  
+
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<mno;j++){
+            if(p[i].flag==0){
+        if(p[i].psize<=m[j].size){
+            if(m[i].alloc==1){
+                continue;
+            }else{
+                m[i].alloc=1;
+                p[i].flag=1;
+                printf("Process of size %d is allocated in memory location %d\n",p[i].psize,m[j].size);
+            }
+        }
+        } 
+    }}
+    for(int i=0;i<n;i++)
+    if(p[i].flag==0){
+        printf("No space for process of size  %d to be allocated\n",p[i].psize);
+    }
+}
+
+OUTPUT:
+Enter the no of processes3
+Enter the no of memory blocks3 
+Enter the process size10
+20
+60
+Enter the size of memory block15
+25
+55
+Process of size 10 is allocated in memory location 15
+Process of size 20 is allocated in memory location 25
+No space for process of size  60 to be allocated
