@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+void main()
+{
+    int RQ[100],TotalHeadMovement=0,initial,n,i;
+    printf("Enter the no of Requests\n");
+    scanf("%d",&n);
+    printf("Enter the  Request sequence:\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&RQ[i]);
+    }
+    printf("Enter initial head position\n");
+    scanf("%d",&initial);
+    
+    //Logic for FCFS Scheduling
+    
+    for(int i=0;i<n;i++)
+    
+    {
+        TotalHeadMovement=TotalHeadMovement+abs(RQ[i]-initial);
+        initial=RQ[i];
+    }
+    printf("\nTotalHeadMovement is %d:",TotalHeadMovement);
+}
+        
+        
+
+OUTPUT:
+Enter the no of Requests
+8
+Enter the  Request sequence:
+98 183 37 122 14 124 65 67
+Enter initial head position
+53
+
+TotalHeadMovement is 640
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+ 
