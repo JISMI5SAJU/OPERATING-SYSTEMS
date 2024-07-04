@@ -42,3 +42,14 @@ echo "$c"
 a=$b
 b=$c
 done
+
+Details of Student:
+echo "Enter your name"
+read name
+echo "Enter your semester"
+read sem
+echo "Enter your batch"
+read batch
+echo "Enter your rollno"
+read rollno
+echo -e "name:$name\nSem:$sem\nBatch:$batch\n$rollno"
