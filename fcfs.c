@@ -32,18 +32,16 @@ void main()
 }
 
 output:
-Enter no of processes3
-Enter the process and their corresponding burst times
-1
-5
-2
-10
+Enter the number of processses
 3
-3
-process	bt	wt	tat
- 1	   5	  0	 5
- 2	   10	  5	 15
- 3	   3	  15	 18
+Enter process,burst time and Priority
+1 10 2
+2 5 1
+3 3 3
+Process bt      Priority        wt      tat
+2       5       1               0       5
+1       10      2               5       15
+3       3       3               15      18
 Average waiting time=6.666667
-Average turnaroundTime=12.666667
+Average TurnAround time=12.666667
 
