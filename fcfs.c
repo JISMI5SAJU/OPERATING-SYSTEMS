@@ -31,17 +31,19 @@ void main()
     printf("Average waiting time=%f\nAverage turnaroundTime=%f\n",totwt/n,tottat/n);
 }
 
-output:
+
+OUTPUT:
+
 Enter the number of processses
 3
-Enter process,burst time and Priority
-1 10 2
-2 5 1
-3 3 3
-Process bt      Priority        wt      tat
-2       5       1               0       5
-1       10      2               5       15
-3       3       3               15      18
-Average waiting time=6.666667
-Average TurnAround time=12.666667
+Enter process,burst time
+1 10
+2 5
+3 3
+Process bt      wt      tat
+1       10      0       10
+2       5       10      15
+3       3       15      18
+Average waiting time=8.333333
+Average TurnAround time=14.333333
 
