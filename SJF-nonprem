@@ -48,5 +48,6 @@ Process bt      wt      tat
 3       3       0       3
 2       5       3       8
 1       10      8       18
-
+Average waiting time=3.666667
+Average TurnAround time=9.666667
    
