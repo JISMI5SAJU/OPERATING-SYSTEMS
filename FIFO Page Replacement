@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+void main() {
+    int no_req, no_frame, i, j = 0, pgf = 0, avail;
+    
+    // Input number of requests and frames
+    printf("Enter number of requests: ");
+    scanf("%d", &no_req);
+    
+    printf("Enter number of frames: ");
+    scanf("%d", &no_frame);
+    
+    int req[no_req], frame[no_frame];
+    
+    // Initialize frames to -1
+    for (i = 0; i < no_frame; i++) {
+        frame[i] = -1;
+    }
+    
+    // Input the requests
+    printf("Enter the requests:\n");
+    for (i = 0; i < no_req; i++) {
+        scanf("%d", &req[i]);
+    }
+    
+    // Process the requests and implement page replacement
+    printf("PAGE REPLACEMENT:\n");
+    for (i = 0; i < no_req; i++) {
+        avail = 0;
+        
+        // Check if the request is already in the frames
+        for (int a = 0; a < no_frame; a++) {
+            if (frame[a] == req[i]) {
+                avail = 1;
+                break;
+            }
+        }
+        
+        // If the request is not in the frames, replace a page
+        if (avail == 0) {
+            frame[j] = req[i];
+            j = (j + 1) % no_frame; // Move to the next frame in a circular manner
+            pgf++; // Increment page fault count
+        }
+        
+        // Print the current state of the frames
+        printf("Frames: ");
+        for (int a = 0; a < no_frame; a++) {
+            printf("%d ", frame[a]);
+        }
+        printf("\n");
+    }
+    
+    // Output the number of page faults
+    printf("Number of page faults = %d\n", pgf);
+}
+Enter number of requests: 8
+Enter number of frames: 3
+Enter the requests:
+1 2 3 1 2 5 4 6
+PAGE REPLACEMENT:
+Frames: 1 -1 -1 
+Frames: 1 2 -1 
+Frames: 1 2 3 
+Frames: 1 2 3 
+Frames: 1 2 3 
+Frames: 5 2 3 
+Frames: 5 4 3 
+Frames: 5 4 6 
+Number of page faults = 6
+
+OUTPUT:
