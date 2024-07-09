@@ -1,0 +1,102 @@
+#include <stdio.h>
+//Function to calculate absolute absoluteValue
+int absoluteValue(int x){
+    return (x>=0)?x:-x;
+}
+int main()
+{
+    int maxrange,initial,i,n,temp,difference,j,seek=0;
+    
+    printf("eNTER MR");
+    scanf("%d",&maxrange);
+    
+    printf("eNTER no of req");
+    scanf("%d",&n);
+    
+    printf("Enter initial hp");
+    scanf("%d",&initial);
+    
+    int queue[n];
+    printf("eNTER  req");
+    for(i=0;i<n;i++){
+        scanf("%d",&queue[i]);
+    }
+    
+    queue[n]=maxrange;
+    
+//sorting
+ for(i=0;i<=n;i++){
+     for(j=i+1;j<=n;j++){
+         if(queue[i]>queue[j]){
+             temp=queue[i];
+             queue[i]=queue[j];
+             queue[j]=temp;
+         }
+     }
+ }
+  //calculation
+  for(i=0;i<n;i++){
+      difference=absoluteValue(queue[i+1]-queue[i]);
+      seek=seek+difference;
+      printf("Disk head moves from %d to %d with seek%d\n",queue[i],queue[i+1],difference);
+  }
+    return 0;
+
+}
+
+OUTPUT
+eNTER MR200
+eNTER no of req5
+Enter initial hp50
+eNTER  req95 165 20 130 10
+Disk head moves from 10 to 20 with seek10
+Disk head moves from 20 to 95 with seek75
+Disk head moves from 95 to 130 with seek35
+Disk head moves from 130 to 165 with seek35
+Disk head moves from 165 to 200 with seek35
+
+
+FCFS:
+#include <stdio.h>
+int absoluteValue(int x){
+    return x>=0?x:-x;
+}
+int  main()
+{
+    int initial,i,n,temp,difference,seek=0;
+    
+    
+    printf("ENTER no of req");
+    scanf("%d",&n);
+    
+    printf("Enter initial hp");
+    scanf("%d",&initial);
+    
+    int queue[n];
+    printf("ENTER  req");
+    for(i=0;i<n;i++){
+        scanf("%d",&queue[i]);
+    }
+    
+    queue[n]=initial;
+    
+  //calculation
+  for(i=0;i<n;i++){
+      difference=absoluteValue(queue[i]-queue[i+1]);
+      seek=seek+difference;
+      printf("Disk head moves from %d to %d with seek%d\n",queue[i],queue[i+1],difference);
+  }
+  printf("Total seek time=%d",seek);
+return 0;
+}
+
+OUT:
+ENTER no of req5
+Enter initial hp50
+ENTER  req45 60 70 30 35
+Disk head moves from 45 to 60 with seek15
+Disk head moves from 60 to 70 with seek10
+Disk head moves from 70 to 30 with seek40
+Disk head moves from 30 to 35 with seek5
+Disk head moves from 35 to 50 with seek15
+Total seek time=85
