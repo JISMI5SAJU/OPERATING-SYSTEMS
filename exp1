@@ -1,0 +1,245 @@
+#include<stdio.h>
+void main()
+{
+int ch,n,i,j,temp,temp2;
+do{
+printf("Enter the choice:\n1.FCFS\n2.SJF\n3.Priority\n4.RoundRobin\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+{
+printf("Enter the number of processes\n");
+scanf("%d",&n);
+int p[n],bt[n],tat[n],wt[n];
+printf("Enter the process and burst time\n");
+for(i=0;i<n;i++)
+{
+scanf("%d%d",&p[i],&bt[i]);
+}
+wt[0]=0,tat[0]=bt[0];
+
+float tot_wt=wt[0],tot_tat=bt[0];
+
+for(i=1;i<n;i++)
+{
+wt[i]=wt[i-1]+bt[i-1];
+tat[i]=tat[i-1]+bt[i];
+tot_wt=tot_wt+wt[i];
+tot_tat=tot_tat+tat[i];
+}
+printf("Process\tbt\twt\ttat\n");
+for(i=0;i<n;i++)
+{
+printf("%d\t%d\t%d\t%d\n",p[i],bt[i],wt[i],tat[i]);
+}
+printf("Gantt chart\n");
+for(i=0;i<n;i++){
+printf("\t|P%d|\t",p[i]);
+}
+printf("\n");
+for(i=0;i<n;i++)
+{
+printf("%d\t\t",wt[i]);
+}
+printf("%d",tat[n-1]);
+printf("\nTotal waiting time=%f\n",tot_wt);
+printf("Total TurnAround time=%f\n",tot_tat);
+printf("Average waiting time=%f\n",(float)tot_wt/n);
+printf("Average TurnAround time=%f\n",(float)tot_tat/n);
+}
+break;
+case 2:
+{
+printf("Enter the number of processes\n");
+scanf("%d",&n);
+int p[n],bt[n],tat[n],wt[n];
+printf("Enter the process and burst time\n");
+for(i=0;i<n;i++)
+{
+scanf("%d%d",&p[i],&bt[i]);
+}
+for(i=0;i<n;i++)
+{
+for(j=i+1;j<n;j++)
+{
+if(bt[i]>bt[j])
+{
+temp=bt[i];
+bt[i]=bt[j];
+bt[j]=temp;
+
+temp2=p[i];
+p[i]=p[j];
+p[j]=temp2;
+}
+}}
+wt[0]=0,tat[0]=bt[0];
+
+float tot_wt=wt[0],tot_tat=tat[0];
+
+for(i=1;i<n;i++)
+{
+wt[i]=wt[i-1]+bt[i-1];
+tat[i]=tat[i-1]+bt[i];
+tot_wt=tot_wt+wt[i];
+tot_tat=tot_tat+tat[i];
+}
+printf("Process\tbt\twt\ttat\n");
+for(i=0;i<n;i++)
+{
+printf("%d\t%d\t%d\t%d\n",p[i],bt[i],wt[i],tat[i]);
+}
+printf("Gantt chart\n");
+for(i=0;i<n;i++){
+printf("\t|P%d|\t",p[i]);
+}
+printf("\n");
+for(i=0;i<n;i++)
+{
+printf("%d\t\t",wt[i]);
+}
+printf("%d",tat[n-1]);
+printf("\nTotal waiting time=%f\n",tot_wt);
+printf("Total TurnAround time=%f\n",tot_tat);
+printf("Average waiting time=%f\n",(float)tot_wt/n);
+printf("Average TurnAround time=%f\n",(float)tot_tat/n);
+}
+case 3:
+{
+printf("Enter the number of processes\n");
+scanf("%d",&n);
+int p[n],bt[n],tat[n],wt[n],pri[n];
+printf("Enter the process,burst time and priority\n");
+for(i=0;i<n;i++)
+{
+scanf("%d%d%d",&p[i],&bt[i],&pri[i]);
+}
+for(i=0;i<n;i++)
+{
+for(j=0;j<n-i-1;j++)
+{
+if(pri[j]>pri[j+1])
+{
+temp=pri[j];
+pri[j]=pri[j+1];
+pri[j+1]=temp;
+
+temp=p[j];
+p[j]=p[j+1];
+p[j+1]=temp;
+
+temp=bt[j];
+bt[j]=bt[j+1];
+bt[j+1]=temp;
+}}}
+wt[0]=0,tat[0]=bt[0];
+
+float tot_wt=wt[0],tot_tat=tat[0];
+
+for(i=1;i<n;i++)
+{
+wt[i]=wt[i-1]+bt[i-1];
+tat[i]=tat[i-1]+bt[i];
+tot_wt=tot_wt+wt[i];
+tot_tat=tot_tat+tat[i];
+}
+printf("Process\tbt\tPriority\twt\ttat\n");
+for(i=0;i<n;i++)
+{
+printf("%d\t%d\t%d\t\t%d\t%d\n",p[i],bt[i],pri[i],wt[i],tat[i]);
+}
+printf("Gantt chart\n");
+for(i=0;i<n;i++){
+printf("\t|P%d|\t",p[i]);
+}
+printf("\n");
+for(i=0;i<n;i++)
+{
+printf("%d\t\t",wt[i]);
+}
+printf("%d",tat[n-1]);
+printf("\nTotal waiting time=%f\n",tot_wt);
+printf("Total TurnAround time=%f\n",tot_tat);
+printf("Average waiting time=%f\n",(float)tot_wt/n);
+printf("Average TurnAround time=%f\n",(float)tot_tat/n);
+}
+break;
+case 4:
+int limit,f=1,prt[30];
+prt[0]=0;
+int p[limit],bt[limit],rem[limit],flag,tq;
+printf("Enter the limit\n");
+scanf("%d",&limit);
+printf("Enter the processes \n");
+  for(int i=0;i<limit;i++)
+  {
+    scanf("%d",&p[i]);
+  }
+  printf("Enter the burst time\n");
+  for(int i=0;i<limit;i++)
+  {
+    scanf("%d",&bt[i]);
+    rem[i]=bt[i];
+  }
+  printf("Enter the time quantum\n");
+  scanf("%d",&tq);
+ 
+  while(flag<limit)
+  {
+   for(int i=0;i<limit;i++)
+   {
+   if(rem[i]>0)
+   {
+    if(rem[i]>tq)
+    {
+     
+     time=time+tq;
+     rem[i]=rem[i]-tq;
+     printf("  p%d\t",p[i]);
+     prt[f]=time;
+     f++;
+    }
+    else
+    {
+    
+    time=time+rem[i];
+    tat[i]=time;
+    wt[i]=time-bt[i];
+    rem[i]=0;
+    flag++;
+    printf("  p%d\t",p[i]);
+    prt[f]=time;
+     f++;
+    }
+    }
+   }
+  }
+  
+  
+  printf("\n");
+  for(int i=0;i<f;i++)
+  {
+   printf("%d\t",prt[i]);
+  }
+   printf("\nProcess\tBt\tWt\tTat\n");
+   for(int i=0;i<limit;i++)
+   {
+    tot_wt+=wt[i];
+    tot_tat+=tat[i];
+    printf("p%d\t%d\t%d\t%d\n",p[i],bt[i],wt[i],tat[i]);
+   }
+   float tot_wt,tot_tat,avg_wt,avg_tat;
+   printf("Total waiting time=%d\nTotat turn around time=%d\n",tot_wt,tot_tat);
+   avg_wt=(float)tot_wt/limit;
+   avg_tat=(float)tot_tat/limit;
+   printf("Average waiting time:%f\naverage turn around time:%f\n",avg_wt,avg_tat);
+  
+   break;
+case 5:
+{
+printf("Invalid choice\n");
+break;
+}}
+}while(ch<3);
+}
