@@ -59,44 +59,42 @@ Disk head moves from 165 to 200 with seek35
 FCFS:
 #include <stdio.h>
 int absoluteValue(int x){
-    return x>=0?x:-x;
+    return (x>=0)?x:-x;
 }
-int  main()
+int main()
 {
-    int initial,i,n,temp,difference,seek=0;
-    
-    
-    printf("ENTER no of req");
+    int n,i,initial,seek=0,difference;
+    printf("Enter no of requests");
     scanf("%d",&n);
-    
-    printf("Enter initial hp");
+    printf("Enter initial head position");
     scanf("%d",&initial);
-    
     int queue[n];
-    printf("ENTER  req");
-    for(i=0;i<n;i++){
+    printf("enter the requests");
+    for(i=0;i<n;i++)
+    {
         scanf("%d",&queue[i]);
     }
-    
-    queue[n]=initial;
-    
-  //calculation
-  for(i=0;i<n;i++){
-      difference=absoluteValue(queue[i]-queue[i+1]);
-      seek=seek+difference;
-      printf("Disk head moves from %d to %d with seek%d\n",queue[i],queue[i+1],difference);
-  }
-  printf("Total seek time=%d",seek);
-return 0;
+    int currentposition=initial;
+    for(i=0;i<n;i++)
+    {
+        difference=absoluteValue(currentposition-queue[i]);
+        seek=seek+difference;
+        printf("Disk head moves from %d to %d with seektime %d\n",currentposition,queue[i],difference);
+        currentposition=queue[i];
+    }
+    printf("Total Head Movement=%d",seek);
+    return 0;
 }
-
-OUT:
-ENTER no of req5
-Enter initial hp50
-ENTER  req45 60 70 30 35
-Disk head moves from 45 to 60 with seek15
-Disk head moves from 60 to 70 with seek10
-Disk head moves from 70 to 30 with seek40
-Disk head moves from 30 to 35 with seek5
-Disk head moves from 35 to 50 with seek15
-Total seek time=85
+output:
+Enter initial head position50
+enter the requests45
+60
+70
+30
+55
+Disk head moves from 50 to 45 with seektime 5
+Disk head moves from 45 to 60 with seektime 15
+Disk head moves from 60 to 70 with seektime 10
+Disk head moves from 70 to 30 with seektime 40
+Disk head moves from 30 to 55 with seektime 25
+Total Head Movement=95
